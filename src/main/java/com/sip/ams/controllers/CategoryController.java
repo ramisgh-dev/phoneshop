@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-//import com.sip.ams.entities.Article;
+//import com.sip.ams.entities.phone;
 import com.sip.ams.entities.Category;
 import com.sip.ams.repositories.CategoryRepository;
 
