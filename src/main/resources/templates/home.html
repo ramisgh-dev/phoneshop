@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>AMS-Dashboard</title>
+</head>
+<body>
+
+	<div th:replace="fragments/header :: header" />
+
+	<div class="container">
+		
+    <div class="starter-template">
+				<h1>Welcome to our PHONE-SHOP :</h1>
+				<h2  sec:authorize="hasAnyAuthority('ADMIN')">
+					1. Category <a th:href="@{/category/list}">Categorys</a>
+				</h2>
+				<h2  sec:authorize="hasAnyAuthority('ADMIN')">
+					2. Phones <a th:href="@{/phone/list}">Phones</a>
+				</h2>
+				<h2  sec:authorize="hasAnyAuthority('ADMIN')">
+					3. Roles<a th:href="@{/role/list}">Roles</a>
+				</h2>
+				<h2  sec:authorize="hasAnyAuthority('ADMIN')">
+					4. Users<a th:href="@{/accounts/list}">Users</a>
+				</h2>
+				<h2  sec:authorize="hasAnyAuthority('USER')">
+					4. Users<a th:href="@{/phone/listphone}">PhoneShop</a>
+				</h2>
+			</div>
+
+
+
+
+		</div>
+		<!-- /.container -->
+
+		<div th:replace="fragments/footer::footer" />
+</body>
+</html>
