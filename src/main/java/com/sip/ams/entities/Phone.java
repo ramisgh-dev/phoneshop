@@ -27,7 +27,8 @@ public class Phone {
     @Column(name = "label")
     private String label;
     
-    
+    @Column(name = "picture")
+    private String picture;
 
     @Min(value=100)
     @Column(name = "price")
@@ -35,9 +36,10 @@ public class Phone {
 
     public Phone() {}
 
-    public Phone(String label, float price) {
+    public Phone(String label, float price,String picture) {
         this.price = price;
         this.label = label;
+        this.picture=picture;
         }
 
     public void setId(long id) {
@@ -47,6 +49,13 @@ public class Phone {
     public long getId() {
         return id;
     }
+    public void setPicture(String picture) {
+    	this.picture = picture;
+    	}
+    	public String getPicture() {
+    	return picture;
+    	}
+
 
 	public String getLabel() {
 		return label;

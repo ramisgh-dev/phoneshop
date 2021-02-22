@@ -25,6 +25,7 @@
                             <table class="table table-striped table-responsive-md">
                                 <thead>
                                     <tr>
+                                    <td>picture</td>
                                         <th>Label</th>
                                         <th>Price</th>
                                         <th>Category</th>
@@ -33,6 +34,7 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="phonee : ${phones}">
+                                    <td><img alt="Image" th:src="@{'/uploads/'+${phonee.picture}}" width="250" height="250"/></td>
                                         <td th:text="${phonee.label}"></td>
                                         <td th:text="${phonee.price}"></td>
                                         <td th:text="${phonee.provider.name}"></td>

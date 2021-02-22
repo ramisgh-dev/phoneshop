@@ -1,7 +1,13 @@
 package com.sip.ams.controllers;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.List;
+import java.util.Random;
+import java.nio.file.Files;
+
 
 import javax.validation.Valid;
 
@@ -21,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 //import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sip.ams.entities.Phone;
 import com.sip.ams.entities.User;
@@ -36,6 +43,9 @@ public class PhoneController {
 	private final PhoneRepository phoneRepository;
 	private final CategoryRepository categoryRepository;
 	private final UserRepository userRepository;
+	public static String uploadDirectory =
+			System.getProperty("user.dir")+"/src/main/resources/static/uploads";
+
 	
 	@Autowired
     private JavaMailSender javaMailSender;
@@ -82,7 +92,7 @@ public class PhoneController {
 	@PostMapping("add")
 	// @ResponseBody
 	public String addPhone(@Valid Phone phone, BindingResult result,
-			@RequestParam(name = "categoryId", required = false) int p,Model model) {
+			@RequestParam(name = "categoryId", required = false) int p,Model model,@RequestParam("files") MultipartFile[] files) {
 		
 		
 		if (result.hasErrors()) {
@@ -94,6 +104,26 @@ public class PhoneController {
 				.orElseThrow(() -> new IllegalArgumentException("Invalid catgory Id:" + p));
 		
 		phone.setProvider(category);
+		
+		/// part upload
+
+		 StringBuilder fileName = new StringBuilder();
+		 Random ran = new Random();
+		int x = ran.nextInt(6) + 5;
+		for(MultipartFile file : files)
+		
+		{fileName.append(x).append(file.getOriginalFilename());
+		 Path fileNameAndPath = Paths.get(uploadDirectory,
+		fileName.toString()); try {
+		Files.write(fileNameAndPath, file.getBytes());
+		} catch (IOException e) {
+		e.printStackTrace();
+		}
+		phone.setPicture(fileName.toString());
+		}
+		
+
+		
 
 		phoneRepository.save(phone);
 		return "redirect:list";
