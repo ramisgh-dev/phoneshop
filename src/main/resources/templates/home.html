@@ -1,39 +1,96 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>AMS-Dashboard</title>
+<title>PhoneShop</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
 </head>
 <body>
 
 	<div th:replace="fragments/header :: header" />
-
+	<h1 align="center">Welcome to our PHONE-SHOP :</h1>
 	<div class="container">
-		
-    <div class="starter-template">
-				<h1>Welcome to our PHONE-SHOP :</h1>
-				<h2  sec:authorize="hasAnyAuthority('ADMIN')">
-					1. Category <a th:href="@{/category/list}">Categorys</a>
-				</h2>
-				<h2  sec:authorize="hasAnyAuthority('ADMIN')">
-					2. Phones <a th:href="@{/phone/list}">Phones</a>
-				</h2>
-				<h2  sec:authorize="hasAnyAuthority('ADMIN')">
-					3. Roles<a th:href="@{/role/list}">Roles</a>
-				</h2>
-				<h2  sec:authorize="hasAnyAuthority('ADMIN')">
-					4. Users<a th:href="@{/accounts/list}">Users</a>
-				</h2>
-				<h2  sec:authorize="hasAnyAuthority('USER')">
-					4. Users<a th:href="@{/phone/listphone}">PhoneShop</a>
+
+
+		<div class="col-md-12" align="center" sec:authorize="hasAnyAuthority('ADMIN')">
+			<div class="col-md-6" align="right" style="margin-top: 26px;">
+				<i class="fa fa-mobile fa-2x"></i>
+			</div>
+			<div class="col-md-6" align="left">
+				<h2 sec:authorize="hasAnyAuthority('ADMIN')">
+					</span> <a th:href="@{/phone/list}">Phones</a>
 				</h2>
 			</div>
 
-
-
+		</div>
+		<div class="col-md-12" align="center" sec:authorize="hasAnyAuthority('ADMIN')">
+			<div class="col-md-6" align="right" style="margin-top: 26px;">
+				<i class="fa-arrow-right fa-2x"></i>
+			</div>
+			<div class="col-md-6" align="left">
+				<h2 sec:authorize="hasAnyAuthority('ADMIN')">
+					 <a th:href="@{/category/list}">Categorys</a>
+				</h2>
+			</div>
 
 		</div>
-		<!-- /.container -->
 
-		<div th:replace="fragments/footer::footer" />
+		<div class="col-md-12" align="center" sec:authorize="hasAnyAuthority('ADMIN')">
+			<div class="col-md-6" align="right" style="margin-top: 26px;">
+				<i class="fas fa-users fa-2x"></i>
+			</div>
+			<div class="col-md-6" align="left">
+				<h2 sec:authorize="hasAnyAuthority('ADMIN')">
+					<a th:href="@{/accounts/list}">Users</a>
+				</h2>
+			</div>
+
+		</div>
+
+		<div class="col-md-12" align="center" sec:authorize="hasAnyAuthority('ADMIN')">
+			<div class="col-md-6" align="right" style="margin-top: 26px;">
+				<i class="fa fa-arrow-right fa-2x"></i>
+			</div>
+			<div class="col-md-6" align="left">
+				<h2 sec:authorize="hasAnyAuthority('ADMIN')">
+					<a th:href="@{/role/list}">Roles</a>
+				</h2>
+			</div>
+
+		</div>
+
+
+		<div class="col-md-12" align="center">
+			<div class="col-md-6" align="right" style="margin-top: 26px;">
+				<i class="fa fa-mobile fa-2x" sec:authorize="hasAnyAuthority('USER')"></i>
+			</div>
+			<div class="col-md-6" align="left">
+				<h2 sec:authorize="hasAnyAuthority('USER')">
+					<a th:href="@{/phone/listphone}">PhoneShop</a>
+				</h2>
+			</div>
+
+		</div>
+
+
+
+
+
+
+
+
+
+	</div>
+	<!-- /.container -->
+
+	<div th:replace="fragments/footer::footer" />
 </body>
 </html>
