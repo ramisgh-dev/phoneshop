@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sip.ams.entities.Phone;
-import com.sip.ams.entities.User;
+import com.sip.ams.entities.Users;
 import com.sip.ams.entities.Category;
 import com.sip.ams.repositories.PhoneRepository;
 import com.sip.ams.repositories.UserRepository;

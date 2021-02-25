@@ -2,7 +2,7 @@ package com.sip.ams.controllers;
 
 
 import javax.validation.Valid;
-import com.sip.ams.entities.User;
+import com.sip.ams.entities.Users;
 import com.sip.ams.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,15 +33,15 @@ public class LoginController {
     @RequestMapping(value="/registration", method = RequestMethod.GET)
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
-        User user = new User();
-        modelAndView.addObject("user", user);
+        Users users = new Users();
+        modelAndView.addObject("user", users);
         modelAndView.setViewName("registration");
         return modelAndView;
     }
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid Users users, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.findUserByEmail(user.getEmail());
+        Users userExists = userService.findUserByEmail(users.getEmail());
         if (userExists != null) {
             bindingResult
                     .rejectValue("email", "error.user",
@@ -50,9 +50,9 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");
         } else {
-            userService.saveUser(user);
+            userService.saveUser(users);
             modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new User());
+            modelAndView.addObject("user", new Users());
             modelAndView.setViewName("login");
         }
         return modelAndView;

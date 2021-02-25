@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.sip.ams.entities.User;
+import com.sip.ams.entities.Users;
 import com.sip.ams.entities.Role;
 import com.sip.ams.repositories.RoleRepository;
 import com.sip.ams.repositories.UserRepository;
@@ -36,7 +36,7 @@ public class AccountController {
 	@GetMapping("list")
     public String listUsers(Model model) {
     	
-    	List<User> users = (List<User>) userRepository.findAll();
+    	List<Users> users = (List<Users>) userRepository.findAll();
     	long nbr =  userRepository.count();
     
     	if(users.size()==0)
@@ -51,9 +51,9 @@ public class AccountController {
     public String enableUserAcount(@PathVariable ("id") int id) {
     	
 		
-		 User user = userRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid User Id:" + id));
-	     user.setActive(1);
-	     userRepository.save(user);
+		 Users users = userRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid User Id:" + id));
+	     users.setActive(1);
+	     userRepository.save(users);
     	return "redirect:../list";
     }
 	
@@ -61,9 +61,9 @@ public class AccountController {
 	//@ResponseBody
 	public String disableUserAcount(@PathVariable ("id") int id) {
     	
-		 User user = userRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid User Id:" + id));
-	     user.setActive(0);
-	     userRepository.save(user);
+		 Users users = userRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid User Id:" + id));
+	     users.setActive(0);
+	     userRepository.save(users);
     	return "redirect:../list";
     }
 
@@ -75,13 +75,13 @@ public String UpdateUserRole(@RequestParam ("id") int id,
 		@RequestParam ("newrole")String newRole
 		) {
 	
-	 User user = userRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid User Id:" + id));
+	 Users users = userRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid User Id:" + id));
      
 	 Role userRole = roleRepository.findByRole(newRole);
 	 
-     user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+     users.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
      
-     userRepository.save(user);
+     userRepository.save(users);
 	return "redirect:list";
 }
 
